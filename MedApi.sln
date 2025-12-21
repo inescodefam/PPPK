@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36811.4 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedApi", "MedApi.csproj", "{4F600421-C0F3-485E-A34D-960DAE16A48D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedCore", "..\MedCore\MedCore.csproj", "{E9B43AD0-DC2D-4F26-85E9-C86EAEA86983}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedORM", "..\MedORM\MedORM.csproj", "{5954A2B9-DF00-43C7-965F-86896D14B9ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F600421-C0F3-485E-A34D-960DAE16A48D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F600421-C0F3-485E-A34D-960DAE16A48D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F600421-C0F3-485E-A34D-960DAE16A48D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F600421-C0F3-485E-A34D-960DAE16A48D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9B43AD0-DC2D-4F26-85E9-C86EAEA86983}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9B43AD0-DC2D-4F26-85E9-C86EAEA86983}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9B43AD0-DC2D-4F26-85E9-C86EAEA86983}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9B43AD0-DC2D-4F26-85E9-C86EAEA86983}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5954A2B9-DF00-43C7-965F-86896D14B9ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5954A2B9-DF00-43C7-965F-86896D14B9ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5954A2B9-DF00-43C7-965F-86896D14B9ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5954A2B9-DF00-43C7-965F-86896D14B9ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F332AD47-D56C-406D-9764-A5EC84F286FB}
+	EndGlobalSection
+EndGlobal
