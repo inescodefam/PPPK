@@ -1,11 +1,11 @@
 @MedApi_HostAddress = http://localhost:5186
 
-GET {{MedApi_HostAddress}}/todos/
+GET {{MedApi_HostAddress}}
 Accept: application/json
 
 ###
 
-GET {{MedApi_HostAddress}}/todos/1
+GET {{MedApi_HostAddress}}
 Accept: application/json
 
 ###
