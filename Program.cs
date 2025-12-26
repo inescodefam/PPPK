@@ -3,26 +3,20 @@ using MedCore.Interfaces;
 using MedORM.Migrations;
 using MedORM.ORM;
 using MedORM.Repo;
+using System.Reflection;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// dev
-//var connectionString = builder.Configuration.GetConnectionString("PostgreSQL")
-//    ?? throw new InvalidOperationException("Connection string 'PostgreSQL' not found."); 
-
-//check this
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-builder.Services.AddSingleton<MedDbContext>(sp =>
+builder.Services.AddScoped<MedDbContext>(sp => // nova konekcija za svaki upit a ne singleton jedna konekcija za sve, puca kod paralelnih upita
     new MedDbContext(connectionString));
 
 
 builder.Services.AddScoped<IRepositoryFactory, RepositoryFactory>();
-
-/// zašto ovako registriramo repozitorije umjesto preko factory-ja?
 builder.Services.AddScoped<IPatientRepository>(sp =>
 {
     var context = sp.GetRequiredService<MedDbContext>();
@@ -35,10 +29,10 @@ builder.Services.AddScoped<IDoctorRepository>(sp =>
     return new DoctorRepository(context);
 });
 
-//builder.Services.AddControllers();
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
+
         options.JsonSerializerOptions.Converters.Add(
             new JsonStringEnumConverter()
         );
@@ -57,7 +51,6 @@ builder.Services.AddSwaggerGen(options =>
         Description = "Medicinski sustav – ORM demo"
     });
 
-    //options.UseInlineDefinitionsForEnums();
     options.UseAllOfToExtendReferenceSchemas();
 
     options.SchemaGeneratorOptions.UseInlineDefinitionsForEnums = true;
@@ -73,12 +66,11 @@ builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
 var app = builder.Build();
 
 
-if (app.Environment.IsDevelopment()) // check this
+if (app.Environment.IsDevelopment())
 {
-    Console.WriteLine("Running database migrations");
-    var migrationRunner = new MigrationExecutor(connectionString);
+    var entityAssembly = Assembly.Load("MedCore");
+    var migrationRunner = new MigrationExecutor(connectionString, entityAssembly);
     migrationRunner.RunMigrations();
-    Console.WriteLine("Migrations completed!");
 }
 
 if (app.Environment.IsDevelopment())

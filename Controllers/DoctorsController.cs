@@ -1,4 +1,5 @@
-﻿using MedCore.Entities;
+﻿using MedApi.DTOs;
+using MedCore.Entities;
 using MedCore.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +18,7 @@ namespace MedApi.Controllers
 
         // GET: api/doctors
         [HttpGet]
-        public ActionResult<List<Doctor>> GetAllDoctors()
+        public ActionResult<List<DoctorDto>> GetAllDoctors()
         {
             var doctors = _doctorRepository.GetAll();
             return Ok(doctors);
@@ -25,7 +26,7 @@ namespace MedApi.Controllers
 
         // GET: api/doctors/5
         [HttpGet("{id}")]
-        public ActionResult<Doctor> GetDoctor(int id)
+        public ActionResult<DoctorDto> GetDoctor(int id)
         {
             var doctor = _doctorRepository.GetById(id);
 
@@ -37,10 +38,17 @@ namespace MedApi.Controllers
 
         // POST: api/doctors
         [HttpPost]
-        public ActionResult<Doctor> CreateDoctor([FromBody] Doctor doctor)
+        public ActionResult<DoctorDto> CreateDoctor([FromBody] DoctorBaseDto doctorDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
+            Doctor doctor = new Doctor
+            {
+                FirstName = doctorDto.FirstName,
+                LastName = doctorDto.LastName,
+                Specialization = doctorDto.Specialization
+            };
 
             _doctorRepository.Add(doctor);
             _doctorRepository.Save();
@@ -50,14 +58,19 @@ namespace MedApi.Controllers
 
         // PUT: api/doctors/5
         [HttpPut("{id}")]
-        public ActionResult UpdateDoctor(int id, [FromBody] Doctor doctor)
+        public ActionResult UpdateDoctor(int id, [FromBody] DoctorBaseDto doctorBase)
         {
-            if (id != doctor.Id)
-                return BadRequest("ID mismatch.");
-
             var existing = _doctorRepository.GetById(id);
             if (existing == null)
                 return NotFound($"Doctor with ID {id} not found.");
+
+            var doctor = new Doctor
+            {
+                Id = id,
+                FirstName = doctorBase.FirstName,
+                LastName = doctorBase.LastName,
+                Specialization = doctorBase.Specialization
+            };
 
             _doctorRepository.Update(doctor);
             _doctorRepository.Save();

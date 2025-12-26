@@ -1,0 +1,532 @@
+{
+  "Version": "1.0",
+  "CreatedAt": "2025-12-26T14:42:12.3750454Z",
+  "Tables": [
+    {
+      "TableName": "doctors",
+      "EntityName": "Doctor",
+      "Columns": [
+        {
+          "ColumnName": "id",
+          "PropertyName": "Id",
+          "DataType": "INTEGER",
+          "IsNullable": false,
+          "IsPrimaryKey": true,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "firstname",
+          "PropertyName": "FirstName",
+          "DataType": "VARCHAR(100)",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": 100,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "lastname",
+          "PropertyName": "LastName",
+          "DataType": "VARCHAR(100)",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": 100,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "specialization",
+          "PropertyName": "Specialization",
+          "DataType": "VARCHAR",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        }
+      ],
+      "ForeignKeys": []
+    },
+    {
+      "TableName": "examinations",
+      "EntityName": "Examination",
+      "Columns": [
+        {
+          "ColumnName": "id",
+          "PropertyName": "Id",
+          "DataType": "INTEGER",
+          "IsNullable": false,
+          "IsPrimaryKey": true,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "patientid",
+          "PropertyName": "PatientId",
+          "DataType": "INTEGER",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "doctorid",
+          "PropertyName": "DoctorId",
+          "DataType": "INTEGER",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "examinationtype",
+          "PropertyName": "ExaminationType",
+          "DataType": "VARCHAR(50)",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "scheduleddatetime",
+          "PropertyName": "ScheduledDateTime",
+          "DataType": "TIMESTAMP WITHOUT TIME ZONE",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "status",
+          "PropertyName": "Status",
+          "DataType": "VARCHAR(50)",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "findings",
+          "PropertyName": "Findings",
+          "DataType": "text",
+          "IsNullable": true,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "notes",
+          "PropertyName": "Notes",
+          "DataType": "TEXT",
+          "IsNullable": true,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        }
+      ],
+      "ForeignKeys": [
+        {
+          "ColumnName": "patientid",
+          "ReferencedTable": "patients",
+          "ReferencedColumn": "id",
+          "OnDelete": "CASCADE"
+        }
+      ]
+    },
+    {
+      "TableName": "medicalhistorys",
+      "EntityName": "MedicalHistory",
+      "Columns": [
+        {
+          "ColumnName": "id",
+          "PropertyName": "Id",
+          "DataType": "INTEGER",
+          "IsNullable": false,
+          "IsPrimaryKey": true,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "patientid",
+          "PropertyName": "PatientId",
+          "DataType": "INTEGER",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "diseasename",
+          "PropertyName": "DiseaseName",
+          "DataType": "TEXT",
+          "IsNullable": true,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "startdate",
+          "PropertyName": "StartDate",
+          "DataType": "TIMESTAMP WITHOUT TIME ZONE",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "enddate",
+          "PropertyName": "EndDate",
+          "DataType": "TIMESTAMP WITHOUT TIME ZONE",
+          "IsNullable": true,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "notes",
+          "PropertyName": "Notes",
+          "DataType": "TEXT",
+          "IsNullable": true,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        }
+      ],
+      "ForeignKeys": []
+    },
+    {
+      "TableName": "medications",
+      "EntityName": "Medication",
+      "Columns": [
+        {
+          "ColumnName": "id",
+          "PropertyName": "Id",
+          "DataType": "INTEGER",
+          "IsNullable": false,
+          "IsPrimaryKey": true,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "name",
+          "PropertyName": "Name",
+          "DataType": "VARCHAR(200)",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": true,
+          "MaxLength": 200,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "activeingredient",
+          "PropertyName": "ActiveIngredient",
+          "DataType": "VARCHAR(200)",
+          "IsNullable": true,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": 200,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "manufacturer",
+          "PropertyName": "Manufacturer",
+          "DataType": "VARCHAR(200)",
+          "IsNullable": true,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": 200,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "form",
+          "PropertyName": "Form",
+          "DataType": "VARCHAR(100)",
+          "IsNullable": true,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": 100,
+          "DefaultValue": null
+        }
+      ],
+      "ForeignKeys": []
+    },
+    {
+      "TableName": "patients",
+      "EntityName": "Patient",
+      "Columns": [
+        {
+          "ColumnName": "id",
+          "PropertyName": "Id",
+          "DataType": "INTEGER",
+          "IsNullable": false,
+          "IsPrimaryKey": true,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "firstname",
+          "PropertyName": "FirstName",
+          "DataType": "VARCHAR(100)",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": 100,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "lastname",
+          "PropertyName": "LastName",
+          "DataType": "VARCHAR(100)",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": 100,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "oib",
+          "PropertyName": "OIB",
+          "DataType": "CHAR(11)",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": true,
+          "MaxLength": 11,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "dateofbirth",
+          "PropertyName": "DateOfBirth",
+          "DataType": "TIMESTAMP WITHOUT TIME ZONE",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "gender",
+          "PropertyName": "Gender",
+          "DataType": "VARCHAR(50)",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "residenceaddress",
+          "PropertyName": "ResidenceAddress",
+          "DataType": "VARCHAR(300)",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": 300,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "permanentaddress",
+          "PropertyName": "PermanentAddress",
+          "DataType": "VARCHAR(300)",
+          "IsNullable": true,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": 300,
+          "DefaultValue": null
+        }
+      ],
+      "ForeignKeys": []
+    },
+    {
+      "TableName": "prescriptions",
+      "EntityName": "Prescription",
+      "Columns": [
+        {
+          "ColumnName": "id",
+          "PropertyName": "Id",
+          "DataType": "INTEGER",
+          "IsNullable": false,
+          "IsPrimaryKey": true,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "therapyid",
+          "PropertyName": "TherapyId",
+          "DataType": "INTEGER",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "medicationid",
+          "PropertyName": "MedicationId",
+          "DataType": "INTEGER",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "doctorid",
+          "PropertyName": "DoctorId",
+          "DataType": "INTEGER",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "dosage",
+          "PropertyName": "Dosage",
+          "DataType": "TEXT",
+          "IsNullable": true,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "frequency",
+          "PropertyName": "Frequency",
+          "DataType": "TEXT",
+          "IsNullable": true,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "prescribeddate",
+          "PropertyName": "PrescribedDate",
+          "DataType": "TIMESTAMP WITHOUT TIME ZONE",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "enddate",
+          "PropertyName": "EndDate",
+          "DataType": "TIMESTAMP WITHOUT TIME ZONE",
+          "IsNullable": true,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "instructions",
+          "PropertyName": "Instructions",
+          "DataType": "TEXT",
+          "IsNullable": true,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        }
+      ],
+      "ForeignKeys": []
+    },
+    {
+      "TableName": "therapys",
+      "EntityName": "Therapy",
+      "Columns": [
+        {
+          "ColumnName": "id",
+          "PropertyName": "Id",
+          "DataType": "INTEGER",
+          "IsNullable": false,
+          "IsPrimaryKey": true,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "patientid",
+          "PropertyName": "PatientId",
+          "DataType": "INTEGER",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "therapyname",
+          "PropertyName": "TherapyName",
+          "DataType": "TEXT",
+          "IsNullable": true,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "diagnosis",
+          "PropertyName": "Diagnosis",
+          "DataType": "TEXT",
+          "IsNullable": true,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "startdate",
+          "PropertyName": "StartDate",
+          "DataType": "TIMESTAMP WITHOUT TIME ZONE",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "enddate",
+          "PropertyName": "EndDate",
+          "DataType": "TIMESTAMP WITHOUT TIME ZONE",
+          "IsNullable": true,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        },
+        {
+          "ColumnName": "isactive",
+          "PropertyName": "IsActive",
+          "DataType": "BOOLEAN",
+          "IsNullable": false,
+          "IsPrimaryKey": false,
+          "IsUnique": false,
+          "MaxLength": null,
+          "DefaultValue": null
+        }
+      ],
+      "ForeignKeys": []
+    }
+  ]
+}

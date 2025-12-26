@@ -1,4 +1,5 @@
-﻿using MedCore.Entities;
+﻿using MedApi.DTOs;
+using MedCore.Entities;
 using MedCore.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +19,7 @@ namespace MedApi.Controllers
 
         // GET: api/patients
         [HttpGet]
-        public ActionResult<List<Patient>> GetAllPatients()
+        public ActionResult<List<PatientDto>> GetAllPatients()
         {
             var patients = _patientRepository.GetAll();
             return Ok(patients);
@@ -26,7 +27,7 @@ namespace MedApi.Controllers
 
         // GET: api/patients/5
         [HttpGet("{id}")]
-        public ActionResult<Patient> GetPatient(int id)
+        public ActionResult<PatientDto> GetPatient(int id)
         {
             var patient = _patientRepository.GetById(id);
 
@@ -38,7 +39,7 @@ namespace MedApi.Controllers
 
         // GET: api/patients/oib/12345678901
         [HttpGet("oib/{oib}")]
-        public ActionResult<Patient> GetPatientByOIB(string oib)
+        public ActionResult<PatientDto> GetPatientByOIB(string oib)
         {
             var patient = _patientRepository.GetByOIB(oib);
 
@@ -50,7 +51,7 @@ namespace MedApi.Controllers
 
         // GET: api/patients/search?lastName=Horvat
         [HttpGet("search")]
-        public ActionResult<List<Patient>> SearchPatients([FromQuery] string lastName)
+        public ActionResult<List<PatientDto>> SearchPatients([FromQuery] string lastName)
         {
             var patients = _patientRepository.SearchByLastName(lastName);
             return Ok(patients);
@@ -58,7 +59,7 @@ namespace MedApi.Controllers
 
         // GET: api/patients/5/details
         [HttpGet("{id}/details")]
-        public ActionResult<Patient> GetPatientWithDetails(int id)
+        public ActionResult<PatientDto> GetPatientWithDetails(int id)
         {
             var patient = _patientRepository.GetPatientWithDetails(id);
 
@@ -70,36 +71,63 @@ namespace MedApi.Controllers
 
         // POST: api/patients
         [HttpPost]
-        public ActionResult<Patient> CreatePatient([FromBody] Patient patient)
+        public ActionResult<PatientDto> CreatePatient([FromBody] PatientBaseDto patientDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            // Validacija OIB-a (mora biti 11 znamenki)
-            if (patient.OIB.Length != 11)
+            if (patientDto.OIB.Length != 11)
                 return BadRequest("OIB must be exactly 11 digits.");
 
-            // Provjeri postoji li već pacijent s tim OIB-om
-            var existing = _patientRepository.GetByOIB(patient.OIB);
+            var existing = _patientRepository.GetByOIB(patientDto.OIB);
             if (existing != null)
-                return Conflict($"Patient with OIB {patient.OIB} already exists.");
+                return Conflict($"Patient with OIB {patientDto.OIB} already exists.");
 
-            _patientRepository.Add(patient);
-            _patientRepository.Save();
+            if(patientDto.OIB.Any(c => !char.IsDigit(c)) || patientDto.OIB.Length != 11)
+                return BadRequest("OIB must contain 11 digits.");
+
+            Patient patient = new Patient
+            {
+                FirstName = patientDto.FirstName,
+                LastName = patientDto.LastName,
+                OIB = patientDto.OIB,
+                DateOfBirth = patientDto.DateOfBirth,
+                Gender = patientDto.Gender,
+                ResidenceAddress = patientDto.ResidenceAddress,
+
+            };
+
+            try
+            {
+                _patientRepository.Add(patient);
+                _patientRepository.Save();
+                
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "An error occurred while creating or saving the patient.\n " + e.Message);
+            }
 
             return CreatedAtAction(nameof(GetPatient), new { id = patient.Id }, patient);
         }
 
         // PUT: api/patients/5
         [HttpPut("{id}")]
-        public ActionResult UpdatePatient(int id, [FromBody] Patient patient)
+        public ActionResult UpdatePatient(int id, [FromBody] PatientBaseDto patientDto)
         {
-            if (id != patient.Id)
-                return BadRequest("ID mismatch.");
-
             var existing = _patientRepository.GetById(id);
             if (existing == null)
                 return NotFound($"Patient with ID {id} not found.");
+
+            Patient patient = new Patient
+            {
+                Id = id,
+                FirstName = patientDto.FirstName,
+                LastName = patientDto.LastName,
+                OIB = patientDto.OIB,
+                DateOfBirth = patientDto.DateOfBirth,
+            };
+
 
             _patientRepository.Update(patient);
             _patientRepository.Save();
