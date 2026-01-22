@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-builder.Services.AddScoped<MedDbContext>(sp => // nova konekcija za svaki upit a ne singleton jedna konekcija za sve, puca kod paralelnih upita
+builder.Services.AddScoped<MedDbContext>(sp => 
     new MedDbContext(connectionString));
 
 
@@ -27,6 +27,36 @@ builder.Services.AddScoped<IDoctorRepository>(sp =>
 {
     var context = sp.GetRequiredService<MedDbContext>();
     return new DoctorRepository(context);
+});
+
+builder.Services.AddScoped<IExaminationRepository>(sp =>
+{
+    var context = sp.GetRequiredService<MedDbContext>();
+    return new ExaminationRepository(context);
+});
+
+builder.Services.AddScoped<IMedicalHistoryRepository>(sp =>
+{
+    var context = sp.GetRequiredService<MedDbContext>();
+    return new MedicalHistoryRepository(context);
+});
+
+builder.Services.AddScoped<IMedicationRepository>(sp =>
+{
+    var context = sp.GetRequiredService<MedDbContext>();
+    return new MedicationRepository(context);
+});
+
+builder.Services.AddScoped<IPrescriptionRepository>(sp =>
+{
+    var context = sp.GetRequiredService<MedDbContext>();
+    return new PrescriptionRepository(context);
+});
+
+builder.Services.AddScoped<ITherapyRepository>(sp =>
+{
+    var context = sp.GetRequiredService<MedDbContext>();
+    return new TherapyRepository(context);
 });
 
 builder.Services.AddControllers()

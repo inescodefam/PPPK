@@ -1,33 +1,27 @@
 # Medical System – Accessing Data from Program Code
 
-## Opis projekta
-Web aplikacija za upravljanje pacijentima, liječnicima, bolestima, lijekovima i pregledima.
-Projekt demonstrira rad s relacijskom bazom podataka u oblaku koristeći Entity Framework Core
-i vlastitu implementaciju jednostavnog ORM alata.
+## Project Description  
+A web application for managing patients, doctors, diseases, medications, and medical examinations.  
+The project demonstrates working with a relational cloud database using Entity Framework Core and a custom implementation of a simple ORM tool.
 
-## Tehnologije
-- C# (.NET 8)
-- ASP.NET Core MVC
-- PostgreSQL (Docker / Supabase)
-- Entity Framework Core
-- Npgsql
+## Technologies  
+- C# (.NET 8)  
+- ASP.NET Core MVC  
+- PostgreSQL (Docker / Supabase)  
+- Entity Framework Core  
+- Npgsql  
 
-## Funkcionalnosti
-- CRUD operacije nad pacijentima, bolestima, lijekovima i pregledima
-- Eager i Lazy loading povezanih podataka
-- Code First pristup i migracije
-- Vlastita ORM biblioteka:
-  - Refleksija
-  - Atributi za mapiranje
-  - Automatsko generiranje SQL-a
-  - Change tracking
+## Features  
+- CRUD operations for patients, diseases, medications, and examinations  
+- Eager loading of related data  
+- Code First approach and migrations  
+- Custom ORM library:  
+  - Reflection  
+  - Mapping attributes  
+  - Automatic SQL generation  
+  - Change tracking  
 
-## Arhitektura
-- Med.Api
-- MedCore
-- MedORM
-
-## Pokretanje
-1. Pokrenuti PostgreSQL (Docker ili Supabase)
-2. Izvršiti `dotnet ef database update`
-3. Pokrenuti aplikaciju
+## Architecture  
+- Med.Api  
+- MedCore  
+- MedORM  

@@ -26,6 +26,5 @@ namespace MedApi.DTOs
     {
         [Key]
         public int Id { get; set; }
-
     }
 }
