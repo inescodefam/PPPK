@@ -1,7 +1,7 @@
 # Medical System – Accessing Data from Program Code
 
 ## Project Description  
-A web application for managing patients, doctors, diseases, medications, and medical examinations.  
+An application for managing patients, doctors, diseases, medications, and medical examinations.  
 The project demonstrates working with a relational cloud database using Entity Framework Core and a custom implementation of a simple ORM tool.
 
 ## Technologies  
